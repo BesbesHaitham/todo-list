@@ -9,14 +9,14 @@ async function request(path, options = {}) {
     headers: { 'Content-Type': 'application/json', ...options.headers },
     signal: AbortSignal.timeout(1800),
   });
-  if (!response.ok) throw new Error(`Mock API returned ${response.status}`);
+  if (!response.ok) throw new Error(`L’API simulée a renvoyé le statut ${response.status}.`);
   return response.status === 204 ? null : response.json();
 }
 
 export const tasksApi = {
   async list() {
     const tasks = await request('/tasks');
-    if (!validTasks(tasks)) throw new Error('Invalid initial task data');
+    if (!validTasks(tasks)) throw new Error('Les données initiales des tâches sont invalides.');
     return tasks;
   },
   create: (task) => request('/tasks', { method: 'POST', body: JSON.stringify(task) }),

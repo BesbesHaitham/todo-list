@@ -3,8 +3,9 @@ import Badge from '../atoms/Badge';
 import Checkbox from '../atoms/Checkbox';
 import IconButton from '../atoms/IconButton';
 import styles from './TaskCard.module.css';
+import { PRIORITY_LABELS } from '../../store/taskModel';
 
-const dateFormatter = new Intl.DateTimeFormat('en-US', {
+const dateFormatter = new Intl.DateTimeFormat('fr-FR', {
   month: 'short',
   day: 'numeric',
   year: 'numeric',
@@ -29,7 +30,7 @@ export default function TaskCard({
         <Checkbox
           checked={done}
           onChange={() => onComplete?.(task)}
-          aria-label={`${done ? 'Reopen' : 'Complete'} ${task.title}`}
+          aria-label={`${done ? 'Rouvrir' : 'Terminer'} la tâche « ${task.title} »`}
           className={styles.checkbox}
           tabIndex={overlay ? -1 : 0}
         />
@@ -46,8 +47,9 @@ export default function TaskCard({
           type="button"
           {...dragHandleProps}
           className={styles.drag}
-          aria-label={`Move ${task.title}`}
-          title="Drag to move · Space + arrows with keyboard"
+          aria-label={`Déplacer la tâche « ${task.title} »`}
+          aria-roledescription="tâche déplaçable"
+          title="Glisser pour déplacer · Espace et flèches au clavier"
           tabIndex={overlay ? -1 : 0}
         >
           <GripVertical size={18} />
@@ -61,12 +63,12 @@ export default function TaskCard({
               {dateFormatter.format(new Date(`${task.dueDate}T12:00:00`))}
             </time>
           ) : (
-            <span>No due date</span>
+            <span>Sans échéance</span>
           )}
         </span>
         <div className={styles.actions}>
           <IconButton
-            label={`Edit ${task.title}`}
+            label={`Modifier la tâche « ${task.title} »`}
             size="sm"
             onClick={() => onEdit?.(task)}
             tabIndex={overlay ? -1 : 0}
@@ -74,7 +76,7 @@ export default function TaskCard({
             <Pencil size={14} />
           </IconButton>
           <IconButton
-            label={`Delete ${task.title}`}
+            label={`Supprimer la tâche « ${task.title} »`}
             size="sm"
             onClick={() => onDelete?.(task)}
             tabIndex={overlay ? -1 : 0}
@@ -82,9 +84,7 @@ export default function TaskCard({
             <Trash2 size={14} />
           </IconButton>
         </div>
-        <Badge variant={task.priority}>
-          {task.priority[0].toUpperCase() + task.priority.slice(1)}
-        </Badge>
+        <Badge variant={task.priority}>{PRIORITY_LABELS[task.priority]}</Badge>
       </footer>
     </article>
   );

@@ -48,7 +48,7 @@ export default function Modal({ title, description, children, onClose }) {
           <h2 id={titleId}>{title}</h2>
           {description && <p id={descriptionId}>{description}</p>}
         </div>
-        <IconButton label="Close dialog" onClick={onClose}>
+        <IconButton label="Fermer la fenêtre" onClick={onClose}>
           <X size={20} />
         </IconButton>
       </header>

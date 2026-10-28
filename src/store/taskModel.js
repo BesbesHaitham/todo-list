@@ -1,9 +1,15 @@
 export const COLUMNS = [
-  { id: 'todo', label: 'To Do', variant: 'neutral', description: 'Ready when you are' },
-  { id: 'progress', label: 'In Progress', variant: 'warning', description: 'Making things happen' },
-  { id: 'done', label: 'Done', variant: 'success', description: 'A little win, every time' },
+  { id: 'todo', label: 'À faire', variant: 'neutral', description: 'À votre rythme' },
+  { id: 'progress', label: 'En cours', variant: 'warning', description: 'Chaque étape compte' },
+  {
+    id: 'done',
+    label: 'Terminées',
+    variant: 'success',
+    description: 'Une petite victoire à chaque tâche',
+  },
 ];
 export const PRIORITIES = ['high', 'medium', 'low'];
+export const PRIORITY_LABELS = { high: 'Élevée', medium: 'Moyenne', low: 'Faible' };
 export const STORAGE_KEY = 'focus-tasks:v1';
 
 export function validDate(value) {

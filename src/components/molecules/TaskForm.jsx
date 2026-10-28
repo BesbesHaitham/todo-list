@@ -2,7 +2,7 @@ import { useId, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
-import { COLUMNS, PRIORITIES, validDate } from '../../store/taskModel';
+import { COLUMNS, PRIORITIES, PRIORITY_LABELS, validDate } from '../../store/taskModel';
 import styles from './TaskForm.module.css';
 
 export default function TaskForm({ task, initialStatus = 'todo', onSubmit, onCancel }) {
@@ -21,11 +21,11 @@ export default function TaskForm({ task, initialStatus = 'todo', onSubmit, onCan
   const submit = (event) => {
     event.preventDefault();
     if (!values.title.trim()) {
-      setError('Please give your task a title.');
+      setError('Veuillez donner un titre à votre tâche.');
       return;
     }
     if (!validDate(values.dueDate)) {
-      setError('Please choose a valid due date.');
+      setError('Veuillez choisir une échéance valide.');
       return;
     }
     onSubmit({ ...values, title: values.title.trim(), description: values.description.trim() });
@@ -34,16 +34,20 @@ export default function TaskForm({ task, initialStatus = 'todo', onSubmit, onCan
     <form onSubmit={submit} className={styles.base}>
       <div className={styles.field}>
         <label htmlFor={fieldId('title')}>
-          Task title <span className={styles.required}>*</span>
+          Titre de la tâche <span className={styles.required}>*</span>
         </label>
         <Input
           id={fieldId('title')}
           name="title"
-          placeholder="What needs to get done?"
+          placeholder="Que souhaitez-vous faire ?"
           value={values.title}
           onChange={update}
           maxLength={120}
           required
+          onInvalid={(event) =>
+            event.target.setCustomValidity('Veuillez donner un titre à votre tâche.')
+          }
+          onInput={(event) => event.target.setCustomValidity('')}
           autoFocus
           aria-invalid={!!error}
           aria-describedby={error ? fieldId('error') : undefined}
@@ -51,13 +55,13 @@ export default function TaskForm({ task, initialStatus = 'todo', onSubmit, onCan
       </div>
       <div className={styles.field}>
         <label htmlFor={fieldId('description')}>
-          Description <span>Optional</span>
+          Description <span>Facultatif</span>
         </label>
         <Input
           as="textarea"
           id={fieldId('description')}
           name="description"
-          placeholder="A few details to keep you on track…"
+          placeholder="Quelques détails pour vous guider…"
           value={values.description}
           onChange={update}
           maxLength={2000}
@@ -66,7 +70,7 @@ export default function TaskForm({ task, initialStatus = 'todo', onSubmit, onCan
       </div>
       <div className={styles.row}>
         <div className={styles.field}>
-          <label htmlFor={fieldId('priority')}>Priority</label>
+          <label htmlFor={fieldId('priority')}>Priorité</label>
           <Input
             as="select"
             id={fieldId('priority')}
@@ -76,14 +80,14 @@ export default function TaskForm({ task, initialStatus = 'todo', onSubmit, onCan
           >
             {PRIORITIES.map((priority) => (
               <option key={priority} value={priority}>
-                {priority[0].toUpperCase() + priority.slice(1)}
+                {PRIORITY_LABELS[priority]}
               </option>
             ))}
           </Input>
         </div>
         <div className={styles.field}>
           <label htmlFor={fieldId('dueDate')}>
-            Due date <span>Optional</span>
+            Échéance <span>Facultatif</span>
           </label>
           <Input
             type="date"
@@ -97,7 +101,7 @@ export default function TaskForm({ task, initialStatus = 'todo', onSubmit, onCan
         </div>
       </div>
       <div className={styles.field}>
-        <label htmlFor={fieldId('status')}>Status</label>
+        <label htmlFor={fieldId('status')}>Statut</label>
         <Input
           as="select"
           id={fieldId('status')}
@@ -119,10 +123,10 @@ export default function TaskForm({ task, initialStatus = 'todo', onSubmit, onCan
       )}
       <div className={styles.footer}>
         <Button variant="secondary" onClick={onCancel}>
-          Cancel
+          Annuler
         </Button>
         <Button type="submit">
-          {task ? 'Save changes' : 'Create task'}
+          {task ? 'Enregistrer' : 'Créer la tâche'}
           <ArrowRight size={16} />
         </Button>
       </div>

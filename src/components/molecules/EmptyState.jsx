@@ -8,12 +8,16 @@ export default function EmptyState({ filtered, onAdd }) {
       <span className={styles.icon}>
         <Inbox size={23} strokeWidth={1.5} />
       </span>
-      <h3>{filtered ? 'No matching tasks' : 'A little room for possibility'}</h3>
-      <p>{filtered ? 'Try a different search or filter.' : 'Add a task, or drag one here.'}</p>
+      <h3>{filtered ? 'Aucune tâche correspondante' : 'De la place pour vos idées'}</h3>
+      <p>
+        {filtered
+          ? 'Essayez une autre recherche ou un autre filtre.'
+          : 'Ajoutez une tâche ou glissez-en une ici.'}
+      </p>
       {!filtered && (
         <Button variant="ghost" size="sm" onClick={onAdd}>
           <Plus size={14} />
-          Add a task
+          Ajouter une tâche
         </Button>
       )}
     </div>

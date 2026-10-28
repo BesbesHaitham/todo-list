@@ -6,24 +6,24 @@ import styles from './TaskToolbar.module.css';
 export default function TaskToolbar({ filters, onChange, total, completed, visible }) {
   const active = filters.search.trim() || filters.priority !== 'all' || filters.due !== 'all';
   return (
-    <section className={styles.base} aria-label="Task filters">
+    <section className={styles.base} aria-label="Filtres des tâches">
       <div className={styles.summary}>
         <h2>
-          Your workspace<span className={styles.dot}>.</span>
+          Votre espace<span className={styles.dot}>.</span>
         </h2>
         <p>
           {active
-            ? `${visible} of ${total} tasks match your filters`
-            : `${total} tasks. ${completed} completed. One step at a time.`}
+            ? `Résultats : ${visible} sur ${total} tâche${total > 1 ? 's' : ''}`
+            : `${total} tâche${total > 1 ? 's' : ''}. ${completed} terminée${completed > 1 ? 's' : ''}. Un pas à la fois.`}
         </p>
       </div>
       <div className={styles.filters}>
         <span className={styles.filterLabel}>
           <SlidersHorizontal size={15} />
-          Filter by
+          Filtrer par
         </span>
         <label className="sr-only" htmlFor="priority-filter">
-          Filter by priority
+          Filtrer par priorité
         </label>
         <Input
           as="select"
@@ -32,13 +32,13 @@ export default function TaskToolbar({ filters, onChange, total, completed, visib
           value={filters.priority}
           onChange={(event) => onChange({ priority: event.target.value })}
         >
-          <option value="all">All priorities</option>
-          <option value="high">High priority</option>
-          <option value="medium">Medium priority</option>
-          <option value="low">Low priority</option>
+          <option value="all">Toutes les priorités</option>
+          <option value="high">Priorité élevée</option>
+          <option value="medium">Priorité moyenne</option>
+          <option value="low">Priorité faible</option>
         </Input>
         <label className="sr-only" htmlFor="due-filter">
-          Filter by due date
+          Filtrer par échéance
         </label>
         <Input
           as="select"
@@ -47,9 +47,9 @@ export default function TaskToolbar({ filters, onChange, total, completed, visib
           value={filters.due}
           onChange={(event) => onChange({ due: event.target.value })}
         >
-          <option value="all">Any due date</option>
-          <option value="today">Due today</option>
-          <option value="overdue">Overdue</option>
+          <option value="all">Toutes les échéances</option>
+          <option value="today">Pour aujourd’hui</option>
+          <option value="overdue">En retard</option>
         </Input>
         {active && (
           <Button
@@ -58,7 +58,7 @@ export default function TaskToolbar({ filters, onChange, total, completed, visib
             onClick={() => onChange({ search: '', priority: 'all', due: 'all' })}
           >
             <RotateCcw size={14} />
-            Reset
+            Réinitialiser
           </Button>
         )}
       </div>

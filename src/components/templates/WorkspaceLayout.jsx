@@ -21,25 +21,25 @@ export default function WorkspaceLayout({
   return (
     <div className={styles.base}>
       <header className={styles.header}>
-        <Link to="/" className={styles.brand} aria-label="Todo List home">
+        <Link to="/" className={styles.brand} aria-label="Accueil — Mes tâches">
           <img src={brand} width="44" height="44" alt="" />
-          <h1>Todo List</h1>
+          <h1>Mes tâches</h1>
         </Link>
         <div className={styles.search}>
           <Search size={20} aria-hidden="true" />
           <label htmlFor="task-search" className="sr-only">
-            Search tasks
+            Rechercher des tâches
           </label>
           <Input
             id="task-search"
             type="search"
             variant="filled"
-            placeholder="Search tasks…"
+            placeholder="Rechercher des tâches…"
             value={search}
             onChange={(event) => onSearch(event.target.value)}
           />
           {search && (
-            <IconButton label="Clear search" size="sm" onClick={() => onSearch('')}>
+            <IconButton label="Effacer la recherche" size="sm" onClick={() => onSearch('')}>
               <X size={16} />
             </IconButton>
           )}
@@ -47,14 +47,14 @@ export default function WorkspaceLayout({
         </div>
         <div className={styles.headerActions}>
           <IconButton
-            label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
+            label={`Passer au thème ${theme === 'light' ? 'sombre' : 'clair'}`}
             onClick={onToggleTheme}
           >
             {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
           </IconButton>
-          <Button onClick={onAdd} disabled={!loaded}>
+          <Button onClick={onAdd} disabled={!loaded} aria-label="Ajouter une tâche">
             <Plus size={20} />
-            Add Task
+            Ajouter
           </Button>
         </div>
       </header>
@@ -65,15 +65,15 @@ export default function WorkspaceLayout({
         <span>
           <span className={styles.statusDot} />
           {!loaded
-            ? 'Getting your workspace ready…'
+            ? 'Préparation de votre espace…'
             : storageError
-              ? 'Browser storage unavailable · changes last for this session'
-              : 'Saved on this device'}
+              ? 'Stockage indisponible · modifications conservées pour cette session'
+              : 'Enregistré sur cet appareil'}
         </span>
-        <span className={styles.tip}>Drag to organize. Make space for what matters.</span>
+        <span className={styles.tip}>Glissez pour organiser vos tâches.</span>
         <span className={styles.progress}>
           <Check size={14} />
-          {completed} of {total} complete
+          {completed} sur {total} terminée{completed > 1 ? 's' : ''}
           <div className={styles.track}>
             <div style={{ width: `${total ? (completed / total) * 100 : 0}%` }} />
           </div>

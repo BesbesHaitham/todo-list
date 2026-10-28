@@ -13,7 +13,7 @@ export default function Badge({
   endIcon,
   label,
   onRemove,
-  removeLabel = 'Remove badge',
+  removeLabel = 'Retirer le badge',
   disabled = false,
   id,
   title,

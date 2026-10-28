@@ -36,6 +36,9 @@ export default function TaskBoard({ tasks, allTasks, filtered, onMove, ...action
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
   const activeTask = allTasks.find((task) => task.id === activeId);
+  const taskTitle = (id) => allTasks.find((task) => task.id === id)?.title || 'Tâche';
+  const dropLabel = (over) =>
+    COLUMNS.find((column) => column.id === over.id)?.label || taskTitle(over.id);
   const finishDrag = ({ active, over }) => {
     setActiveId(null);
     if (!over || active.id === over.id) return;
@@ -50,9 +53,22 @@ export default function TaskBoard({ tasks, allTasks, filtered, onMove, ...action
       onDragEnd={finishDrag}
       onDragCancel={() => setActiveId(null)}
       accessibility={{
+        announcements: {
+          onDragStart: ({ active }) =>
+            `Tâche « ${taskTitle(active.id)} » sélectionnée pour le déplacement.`,
+          onDragOver: ({ active, over }) =>
+            over
+              ? `Tâche « ${taskTitle(active.id)} » au-dessus de « ${dropLabel(over)} ».`
+              : 'La tâche est en dehors des zones de dépôt.',
+          onDragEnd: ({ active, over }) =>
+            over
+              ? `Tâche « ${taskTitle(active.id)} » déposée dans « ${COLUMNS.find((column) => column.id === over.data.current?.status)?.label || dropLabel(over)} ».`
+              : 'Déplacement annulé. La tâche conserve sa position.',
+          onDragCancel: () => 'Déplacement annulé. La tâche conserve sa position.',
+        },
         screenReaderInstructions: {
           draggable:
-            'Press Space to pick up a task. Use arrow keys to move it between positions and columns. Press Space to drop, or Escape to cancel. You can also change status in the edit dialog.',
+            'Appuyez sur Espace pour sélectionner une tâche. Utilisez les flèches pour la déplacer entre les positions et les colonnes. Appuyez sur Espace pour la déposer ou sur Échap pour annuler. Vous pouvez aussi modifier son statut dans le formulaire.',
         },
       }}
     >

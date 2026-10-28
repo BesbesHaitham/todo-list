@@ -53,7 +53,7 @@ export default function TaskColumn({
         {!!tasks.length && (
           <Button variant="ghost" size="sm" className={styles.add} onClick={() => onAdd(column.id)}>
             <Plus size={15} />
-            Add task
+            Ajouter une tâche
           </Button>
         )}
       </div>

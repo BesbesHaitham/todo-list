@@ -17,7 +17,7 @@ export default function ColumnHeader({ column, count, total = count, onAdd }) {
         {count === total ? count : `${count}/${total}`}
       </Badge>
       <IconButton
-        label={`Add task to ${column.label}`}
+        label={`Ajouter une tâche dans la colonne « ${column.label} »`}
         size="sm"
         onClick={onAdd}
         className={styles.add}

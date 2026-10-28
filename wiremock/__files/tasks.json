@@ -1,10 +1,66 @@
 [
-  { "id": "task-ui", "title": "Design the UI", "description": "Create a clean and modern interface", "priority": "high", "status": "todo", "dueDate": "2026-10-28" },
-  { "id": "task-theme", "title": "Add dark mode", "description": "Implement light and dark theme", "priority": "medium", "status": "todo", "dueDate": "2026-10-30" },
-  { "id": "task-docs", "title": "Write documentation", "description": "Add README and usage guide", "priority": "low", "status": "todo", "dueDate": "2026-11-02" },
-  { "id": "task-drag", "title": "Implement drag and drop", "description": "Allow moving tasks between columns", "priority": "medium", "status": "progress", "dueDate": "2026-10-27" },
-  { "id": "task-api", "title": "Connect to WireMock", "description": "Use mock API for tasks", "priority": "low", "status": "progress", "dueDate": "2026-10-29" },
-  { "id": "task-init", "title": "Initialize React project", "description": "Set up Vite and project structure", "priority": "low", "status": "done", "dueDate": "2026-10-20" },
-  { "id": "task-deps", "title": "Install dependencies", "description": "Add required packages", "priority": "medium", "status": "done", "dueDate": "2026-10-21" },
-  { "id": "task-atoms", "title": "Create base components", "description": "Button, Input, Card", "priority": "low", "status": "done", "dueDate": "2026-10-22" }
+  {
+    "id": "task-ui",
+    "title": "Concevoir l’interface",
+    "description": "Créer une interface claire et moderne",
+    "priority": "high",
+    "status": "todo",
+    "dueDate": "2026-10-28"
+  },
+  {
+    "id": "task-theme",
+    "title": "Ajouter le thème sombre",
+    "description": "Mettre en place les thèmes clair et sombre",
+    "priority": "medium",
+    "status": "todo",
+    "dueDate": "2026-10-30"
+  },
+  {
+    "id": "task-docs",
+    "title": "Rédiger la documentation",
+    "description": "Ajouter le fichier README et le guide d’utilisation",
+    "priority": "low",
+    "status": "todo",
+    "dueDate": "2026-11-02"
+  },
+  {
+    "id": "task-drag",
+    "title": "Ajouter le glisser-déposer",
+    "description": "Permettre le déplacement des tâches entre les colonnes",
+    "priority": "medium",
+    "status": "progress",
+    "dueDate": "2026-10-27"
+  },
+  {
+    "id": "task-api",
+    "title": "Connecter WireMock",
+    "description": "Utiliser une API simulée pour les tâches",
+    "priority": "low",
+    "status": "progress",
+    "dueDate": "2026-10-29"
+  },
+  {
+    "id": "task-init",
+    "title": "Initialiser le projet React",
+    "description": "Configurer Vite et la structure du projet",
+    "priority": "low",
+    "status": "done",
+    "dueDate": "2026-10-20"
+  },
+  {
+    "id": "task-deps",
+    "title": "Installer les dépendances",
+    "description": "Ajouter les paquets nécessaires",
+    "priority": "medium",
+    "status": "done",
+    "dueDate": "2026-10-21"
+  },
+  {
+    "id": "task-atoms",
+    "title": "Créer les composants de base",
+    "description": "Bouton, champ de saisie et carte",
+    "priority": "low",
+    "status": "done",
+    "dueDate": "2026-10-22"
+  }
 ]

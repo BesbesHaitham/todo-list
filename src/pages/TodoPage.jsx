@@ -48,10 +48,10 @@ export default function TodoPage() {
   const submitTask = (values) => {
     if (dialog.type === 'edit') {
       dispatch({ type: 'update', id: dialog.task.id, changes: values });
-      notify('Task updated. Keep the momentum going.');
+      notify('Tâche mise à jour. Continuez sur votre lancée !');
     } else {
       dispatch({ type: 'create', task: { ...values, id: crypto.randomUUID() } });
-      notify('Task added. One step closer.');
+      notify('Tâche ajoutée. Un pas de plus !');
     }
     setDialog(null);
   };
@@ -60,8 +60,8 @@ export default function TodoPage() {
     dispatch({ type: 'update', id: task.id, changes: { status } });
     notify(
       status === 'done'
-        ? 'Task completed. A little win worth celebrating.'
-        : 'Task moved back to To Do.'
+        ? 'Tâche terminée. Une petite victoire à célébrer !'
+        : 'Tâche replacée dans la colonne « À faire ».'
     );
   };
 
@@ -86,8 +86,8 @@ export default function TodoPage() {
       />
       {storageError && (
         <p className={styles.warning} role="alert">
-          Your browser could not read or save task data. Check that site storage is enabled. Current
-          changes are available for this session.
+          Votre navigateur ne peut pas lire ou enregistrer les tâches. Vérifiez que le stockage du
+          site est autorisé. Les modifications restent disponibles pour cette session.
         </p>
       )}
       {loaded ? (
@@ -101,13 +101,13 @@ export default function TodoPage() {
           onComplete={completeTask}
           onMove={(id, status, overId) => {
             dispatch({ type: 'move', id, status, overId });
-            notify('Task moved. Your board is up to date.');
+            notify('Tâche déplacée. Votre tableau est à jour.');
           }}
         />
       ) : (
         <div className={styles.loading} role="status">
           <span />
-          Setting up your workspace…
+          Préparation de votre espace…
         </div>
       )}
       <div className={styles.live} role="status" aria-live="polite" aria-atomic="true">
@@ -122,36 +122,36 @@ export default function TodoPage() {
         <Modal
           title={
             dialog.type === 'delete'
-              ? 'Delete this task?'
+              ? 'Supprimer cette tâche ?'
               : dialog.type === 'edit'
-                ? 'Make it your own'
-                : 'A fresh start'
+                ? 'Modifier la tâche'
+                : 'Nouvelle tâche'
           }
           description={
             dialog.type === 'delete'
-              ? 'This will permanently remove the task from this device.'
+              ? 'Cette tâche sera définitivement supprimée de cet appareil.'
               : dialog.type === 'edit'
-                ? 'Update the details and keep moving forward.'
-                : 'Big ideas start with one small task.'
+                ? 'Modifiez les détails et continuez à avancer.'
+                : 'Les grandes idées commencent par une petite tâche.'
           }
           onClose={() => setDialog(null)}
         >
           {dialog.type === 'delete' ? (
             <div className={styles.delete}>
-              <p>“{dialog.task.title}”</p>
+              <p>« {dialog.task.title} »</p>
               <div>
                 <Button variant="secondary" onClick={() => setDialog(null)}>
-                  Keep task
+                  Conserver
                 </Button>
                 <Button
                   variant="danger"
                   onClick={() => {
                     dispatch({ type: 'delete', id: dialog.task.id });
                     setDialog(null);
-                    notify('Task deleted.');
+                    notify('Tâche supprimée.');
                   }}
                 >
-                  Delete task
+                  Supprimer
                   <ArrowRight size={16} />
                 </Button>
               </div>

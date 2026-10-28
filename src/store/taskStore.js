@@ -1,5 +1,6 @@
 import { fallbackTasks, tasksApi } from '../services/tasksApi';
 import { STORAGE_KEY, taskReducer, validTasks } from './taskModel';
+import { translateSampleTasks } from './taskMigration';
 
 // localStorage owns user data. Mock acknowledgements never replace it.
 const browserStorage = {
@@ -50,8 +51,11 @@ export function createTaskStore({
           if (raw !== null) {
             const data = JSON.parse(raw);
             if (data.version !== 1 || !validTasks(data.tasks))
-              throw new Error('Invalid saved data');
-            saved = data.tasks;
+              throw new Error('Les données enregistrées sont invalides.');
+            saved = translateSampleTasks(data.tasks);
+            if (saved.some((task, index) => task !== data.tasks[index])) {
+              storageError = persist(saved);
+            }
           }
         } catch {
           storageError = true;
@@ -60,7 +64,7 @@ export function createTaskStore({
         if (saved !== undefined) publish({ tasks: saved, loaded: true, storageError });
         let initial = seed;
         try {
-          initial = await api.list();
+          initial = translateSampleTasks(await api.list());
         } catch {
           /* Offline first-run seed. */
         }
