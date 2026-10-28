@@ -1,0 +1,20 @@
+.base {
+  flex-shrink: 0;
+  padding: 0;
+  aspect-ratio: 1;
+}
+.sm {
+  width: var(--control-sm);
+}
+.md {
+  width: var(--control-md);
+}
+.lg {
+  width: var(--control-lg);
+}
+.xs {
+  width: var(--control-xs);
+}
+.xl {
+  width: var(--control-xl);
+}

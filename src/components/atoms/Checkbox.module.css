@@ -1,0 +1,74 @@
+.base {
+  appearance: none;
+  flex-shrink: 0;
+  margin: 0;
+  border: 1.5px solid var(--color-neutral);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+  display: grid;
+  place-content: center;
+}
+.base::after {
+  content: '';
+  width: 5px;
+  height: 10px;
+  border: solid var(--color-surface);
+  border-width: 0 2px 2px 0;
+  transform: translateY(-1px) rotate(45deg) scale(0);
+}
+.base:checked::after {
+  transform: translateY(-1px) rotate(45deg) scale(1);
+}
+.default:checked,
+.default:indeterminate {
+  background: var(--color-success);
+  border-color: var(--color-success);
+}
+.primary:checked,
+.primary:indeterminate {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.sm {
+  width: 18px;
+  height: 18px;
+}
+.md {
+  width: 23px;
+  height: 23px;
+}
+.lg {
+  width: 28px;
+  height: 28px;
+}
+.danger:checked,
+.danger:indeterminate {
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+}
+.base:indeterminate::after {
+  width: var(--space-2);
+  height: 0;
+  border-width: 0 0 2px;
+  transform: none;
+}
+.base[aria-invalid='true'] {
+  outline: 1px solid var(--color-danger);
+  outline-offset: 2px;
+}
+.base:disabled {
+  cursor: not-allowed;
+  opacity: var(--opacity-disabled);
+}
+.xs {
+  width: 14px;
+  height: 14px;
+}
+.xl {
+  width: 34px;
+  height: 34px;
+}

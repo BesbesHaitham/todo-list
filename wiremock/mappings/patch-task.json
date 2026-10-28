@@ -1,0 +1,5 @@
+{
+  "name": "Acknowledge task update without persistence",
+  "request": { "method": "PATCH", "urlPathPattern": "/api/tasks(?:/[^/]+)?" },
+  "response": { "status": 200, "headers": { "Content-Type": "application/json" }, "jsonBody": { "acknowledged": true } }
+}

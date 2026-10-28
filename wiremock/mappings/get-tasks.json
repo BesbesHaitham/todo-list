@@ -1,0 +1,5 @@
+{
+  "name": "Initial task fixture (static)",
+  "request": { "method": "GET", "urlPath": "/api/tasks" },
+  "response": { "status": 200, "headers": { "Content-Type": "application/json" }, "bodyFileName": "tasks.json" }
+}

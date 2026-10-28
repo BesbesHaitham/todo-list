@@ -1,0 +1,38 @@
+.base {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-1) var(--space-5);
+}
+.base h2 {
+  font-size: var(--font-lg);
+  font-weight: 650;
+  letter-spacing: -0.4px;
+}
+.indicator {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  border-radius: var(--radius-full);
+}
+.todo {
+  color: var(--color-neutral);
+  background: var(--color-neutral-soft);
+}
+.progress {
+  color: var(--color-warning);
+  background: var(--color-warning-soft);
+}
+.done {
+  background: var(--color-success);
+  color: var(--color-surface);
+}
+.count {
+  border-radius: var(--radius-full);
+  min-width: 28px;
+  padding-inline: var(--space-2);
+}
+.add {
+  margin-left: auto;
+}

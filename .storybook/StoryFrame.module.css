@@ -1,0 +1,19 @@
+.base {
+  color: var(--color-text);
+  background: var(--color-bg);
+  padding: var(--space-4);
+  min-width: 0;
+}
+.card,
+.column {
+  width: 100%;
+  max-width: 420px;
+}
+.form {
+  width: 100%;
+  max-width: 540px;
+}
+.board {
+  width: 100%;
+  max-width: var(--content-max);
+}

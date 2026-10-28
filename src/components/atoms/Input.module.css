@@ -1,0 +1,86 @@
+.base {
+  min-width: 0;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+.base::placeholder {
+  color: var(--color-muted);
+}
+.base:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
+  outline: none;
+}
+.base[aria-invalid='true'] {
+  border-color: var(--color-danger);
+}
+.default {
+  background: var(--color-surface);
+}
+.filled {
+  background: var(--color-subtle);
+  border-color: transparent;
+}
+.sm {
+  min-height: var(--control-sm);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-xs);
+}
+.md {
+  min-height: var(--control-md);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-sm);
+}
+.lg {
+  min-height: var(--control-lg);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-md);
+}
+textarea.base {
+  resize: vertical;
+  min-height: 110px;
+}
+.underline {
+  border-color: transparent;
+  border-bottom-color: var(--color-border);
+  border-radius: 0;
+  background: transparent;
+}
+.base:disabled {
+  cursor: not-allowed;
+  opacity: var(--opacity-disabled);
+}
+.base[readonly] {
+  background: var(--color-subtle);
+}
+.base[multiple] {
+  min-height: calc(var(--control-lg) * 2);
+}
+.xs {
+  min-height: var(--control-xs);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-xs);
+}
+.xl {
+  min-height: var(--control-xl);
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--font-lg);
+}
+select.base:not([multiple]):not([size]),
+select.base:not([multiple])[size='1'] {
+  appearance: none;
+  padding-inline-end: var(--space-8);
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    right calc(var(--space-3) + var(--space-1)) center,
+    right var(--space-3) center;
+  background-size: var(--space-1) var(--space-1);
+  background-repeat: no-repeat;
+}

@@ -1,0 +1,14 @@
+node_modules/
+dist/
+dist-ssr/
+storybook-static/
+.cache/
+.npm-cache/
+.vite/
+*.log
+package-lock.json
+public/*.svg
+src/assets/
+.env
+.env.*
+!.env.example

@@ -1,0 +1,19 @@
+/* An explicit radius overrides each atom's default regardless of CSS import order. */
+.none.none {
+  border-radius: 0;
+}
+.sm.sm {
+  border-radius: var(--radius-sm);
+}
+.md.md {
+  border-radius: var(--radius-md);
+}
+.lg.lg {
+  border-radius: var(--radius-lg);
+}
+.full.full {
+  border-radius: var(--radius-full);
+}
+.fullWidth {
+  width: 100%;
+}

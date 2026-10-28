@@ -1,0 +1,5 @@
+{
+  "name": "Acknowledge task deletion without persistence",
+  "request": { "method": "DELETE", "urlPathPattern": "/api/tasks(?:/[^/]+)?" },
+  "response": { "status": 204 }
+}

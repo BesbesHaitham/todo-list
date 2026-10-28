@@ -1,0 +1,179 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Atoms/Props reference" />
+
+# Reusable atom props
+
+All five atoms are independent of the task store and API. Their existing defaults are preserved, and optional props can be used by other applications, including a Quiz app.
+
+## Shared conventions
+
+| Prop                  | Values or purpose                                                                        |
+| --------------------- | ---------------------------------------------------------------------------------------- |
+| `size`                | `xs`, `sm`, `md`, `lg`, `xl`. Default: `md`.                                             |
+| `radius`              | `none`, `sm`, `md`, `lg`, `full`. Omit it to retain the atom's default corners.          |
+| `className`           | Additional CSS classes, combined with the base and variant classes.                      |
+| `style`               | Native inline styles, including CSS variables for component customization.               |
+| `ref`                 | Access to the underlying native button, input, select, textarea, or span.                |
+| `id`, `title`         | Native identification and tooltip attributes.                                            |
+| `aria-*`, `data-*`    | Accessibility and custom data attributes passed to the native element.                   |
+| Native event handlers | `onClick`, `onFocus`, `onBlur`, `onKeyDown`, and other events supported by that element. |
+
+Use an atom's native HTML attributes directly. For example, buttons accept `form`, `formAction`, `tabIndex`, and `name`; fields accept `min`, `max`, `pattern`, `maxLength`, and `autoComplete`. Unlisted native props are forwarded through `...props`.
+
+## Button
+
+| Prop                           | Default   | Purpose                                                                           |
+| ------------------------------ | --------- | --------------------------------------------------------------------------------- |
+| `variant`                      | `primary` | `primary`, `secondary`, `ghost`, `danger`, `success`, `outline`, `link`.          |
+| `children`, `label`            | —         | Content. `label` is a fallback when `children` is not provided.                   |
+| `type`                         | `button`  | Native `button`, `submit`, or `reset`.                                            |
+| `disabled`                     | `false`   | Disable interaction.                                                              |
+| `loading`                      | `false`   | Show a spinner, disable interaction, and expose `aria-busy`.                      |
+| `loadingLabel`                 | —         | Optional visible text while loading; otherwise keep the existing accessible name. |
+| `startIcon`, `endIcon`         | —         | Decorative React nodes before or after the content.                               |
+| `fullWidth`                    | `false`   | Fill the available width.                                                         |
+| `id`, `name`, `value`, `title` | —         | Native button attributes.                                                         |
+| `autoFocus`                    | `false`   | Native focus on mount.                                                            |
+| `onClick`, `onFocus`, `onBlur` | —         | Native callbacks.                                                                 |
+
+```jsx
+<Button
+  variant="success"
+  size="lg"
+  radius="full"
+  startIcon={<Check />}
+  fullWidth
+  loading={submitting}
+  loadingLabel="Checking answer…"
+  onClick={submitAnswer}
+>
+  Check answer
+</Button>
+```
+
+## Input
+
+| Prop                                  | Default             | Purpose                                                                                                  |
+| ------------------------------------- | ------------------- | -------------------------------------------------------------------------------------------------------- |
+| `as`                                  | `input`             | `input`, `textarea`, or `select`.                                                                        |
+| `variant`                             | `default`           | `default`, `filled`, or `underline`.                                                                     |
+| `type`                                | `text`              | Native input type, such as `email`, `password`, `number`, `date`, or `search`. Only applied to an input. |
+| `value`, `defaultValue`               | —                   | Controlled value or uncontrolled initial value. Choose one.                                              |
+| `onChange`, `onFocus`, `onBlur`       | —                   | Native field callbacks.                                                                                  |
+| `name`, `placeholder`, `autoComplete` | —                   | Native field attributes.                                                                                 |
+| `disabled`, `required`, `autoFocus`   | `false`             | Native interaction, validation, and focus behavior.                                                      |
+| `readOnly`                            | `false`             | Native read-only mode for input or textarea; selects do not support it.                                  |
+| `invalid`                             | `false`             | Apply error styling and `aria-invalid`. Explicit `aria-invalid` is also supported.                       |
+| `fullWidth`                           | `true`              | Fill the available width; set `false` for intrinsic sizing.                                              |
+| `htmlSize`                            | —                   | Native `size` attribute for input or select; distinct from the visual `size` prop.                       |
+| `resize`                              | Browser/default CSS | Textarea resizing: `none`, `vertical`, `horizontal`, or `both`.                                          |
+| `options`                             | —                   | Optional array of `{ value, label, disabled }` for a select. Select children take precedence.            |
+| `children`                            | —                   | Options or option groups for a select. Inputs do not render children.                                    |
+
+```jsx
+<Input
+  name="answer"
+  value={answer}
+  onChange={(event) => setAnswer(event.target.value)}
+  required
+  maxLength={120}
+  invalid={hasError}
+  aria-label="Your answer"
+  aria-describedby="answer-help"
+/>
+
+<Input
+  as="select"
+  name="difficulty"
+  defaultValue="easy"
+  aria-label="Difficulty"
+  options={[
+    { value: 'easy', label: 'Easy' },
+    { value: 'hard', label: 'Hard' },
+  ]}
+/>
+```
+
+A controlled field must update its value in `onChange`; an uncontrolled field uses `defaultValue`. Add labels and help/error text in a molecule rather than tying the atom to one form layout.
+
+## Checkbox
+
+| Prop                                | Default   | Purpose                                                                  |
+| ----------------------------------- | --------- | ------------------------------------------------------------------------ |
+| `variant`                           | `default` | `default`, `primary`, or `danger`.                                       |
+| `checked`, `defaultChecked`         | —         | Controlled state or uncontrolled initial state. Choose one.              |
+| `indeterminate`                     | `false`   | Show the native mixed state, for example when some answers are selected. |
+| `invalid`                           | `false`   | Error styling and `aria-invalid`.                                        |
+| `disabled`, `required`, `autoFocus` | `false`   | Native checkbox attributes.                                              |
+| `name`, `value`                     | —         | Native form submission attributes.                                       |
+| `onChange`                          | —         | Receives the native React change event.                                  |
+| `onCheckedChange`                   | —         | Receives `(checked, event)` for consumers that prefer a boolean.         |
+| `onFocus`, `onBlur`                 | —         | Native callbacks.                                                        |
+
+```jsx
+<Checkbox
+  variant="primary"
+  name="answers"
+  value="a"
+  checked={selected}
+  onCheckedChange={setSelected}
+  aria-label="Select answer A"
+/>
+```
+
+For an indeterminate checkbox, update both `checked` and `indeterminate` in the owning component when the user changes the selection. The `ref` exposes the actual input.
+
+## Badge
+
+| Prop                   | Default        | Purpose                                                                                   |
+| ---------------------- | -------------- | ----------------------------------------------------------------------------------------- |
+| `variant`              | `neutral`      | `neutral`, `primary`, `high`, `medium`, `low`, `danger`, `warning`, or `success`.         |
+| `appearance`           | `soft`         | `soft`, `outline`, or `solid`.                                                            |
+| `children`, `label`    | —              | Content or fallback text. Numbers are supported.                                          |
+| `dot`                  | `false`        | Add a decorative status dot.                                                              |
+| `startIcon`, `endIcon` | —              | Decorative React nodes.                                                                   |
+| `onRemove`             | —              | Show an optional remove button and receive its click event. The parent removes the badge. |
+| `removeLabel`          | `Remove badge` | Accessible name for the remove button. Prefer a contextual label.                         |
+| `disabled`             | `false`        | Dim the badge and disable its remove button.                                              |
+
+```jsx
+<Badge
+  variant="warning"
+  appearance="outline"
+  radius="full"
+  startIcon={<Star />}
+  onRemove={() => removeCategory('science')}
+  removeLabel="Remove Science category"
+>
+  Science
+</Badge>
+```
+
+## IconButton
+
+| Prop                  | Default  | Purpose                                                                      |
+| --------------------- | -------- | ---------------------------------------------------------------------------- |
+| `label`               | —        | Accessible name. Supply this for every icon-only button.                     |
+| `children`, `icon`    | —        | Icon content; `children` takes precedence.                                   |
+| `variant`             | `ghost`  | Same variants as Button.                                                     |
+| `type`                | `button` | Native button type.                                                          |
+| `title`               | `label`  | Optional tooltip override.                                                   |
+| `loading`, `disabled` | `false`  | Spinner or disabled state, inherited from Button.                            |
+| `loadingLabel`        | —        | Optional accessible name while loading.                                      |
+| `pressed`             | —        | Optional `aria-pressed` state for toggle buttons. Omit for ordinary actions. |
+| `onClick`             | —        | Native click handler.                                                        |
+
+IconButton shares Button's native attributes, event handlers, refs, size, and radius options. Its dimensions stay square, and `radius="full"` makes it circular.
+
+```jsx
+<IconButton
+  icon={<Star />}
+  label="Bookmark question"
+  radius="full"
+  pressed={bookmarked}
+  onClick={() => setBookmarked((current) => !current)}
+/>
+```
+
+Each atom's stories demonstrate these states. All styling uses CSS Modules and shared theme tokens; no new package is required.

@@ -1,0 +1,5 @@
+{
+  "name": "Acknowledge task creation without persistence",
+  "request": { "method": "POST", "urlPath": "/api/tasks", "bodyPatterns": [{ "matchesJsonPath": "$.title" }] },
+  "response": { "status": 201, "headers": { "Content-Type": "application/json" }, "jsonBody": { "acknowledged": true } }
+}

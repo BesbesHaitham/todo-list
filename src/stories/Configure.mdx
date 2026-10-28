@@ -1,0 +1,55 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Configure your project" />
+
+# Todo List component library
+
+This Storybook uses the React/Vite setup from the reference project. The stories document the real Todo components and import their existing CSS Modules.
+
+## Start Storybook
+
+```sh
+npm run storybook
+```
+
+Open **http://localhost:6006**. Build a static copy with `npm run build-storybook`.
+
+## Explore your components
+
+- **Atoms**: Button, IconButton, Input, Checkbox, and Badge, with their variants and sizes.
+- **Atoms / Props reference**: the shared API, native HTML attributes, and examples for reusing atoms in another app.
+- **Molecules**: TaskCard, TaskForm, ColumnHeader, EmptyState, and Modal.
+- **Organisms**: TaskBoard, TaskColumn, TaskToolbar, and SortableTask.
+- **Templates**: WorkspaceLayout, including loading and storage warning states.
+
+Use **Controls** to change props and **Actions** to inspect callbacks. The theme toolbar switches between the application's light and dark themes. The board story lets you drag tasks, toggle completion, and delete sample tasks.
+
+Stories use isolated example data. They do not call WireMock or change tasks saved by the Todo app.
+
+## Add a story
+
+Create a `ComponentName.stories.jsx` file in `src/stories/` and import the component from its Atomic Design folder:
+
+```jsx
+import { fn } from 'storybook/test';
+import Button from '../components/atoms/Button';
+
+export default {
+  title: 'Atoms/Button',
+  component: Button,
+  args: { children: 'Save', onClick: fn() },
+};
+
+export const Primary = {};
+export const Secondary = { args: { variant: 'secondary' } };
+```
+
+The `fn()` callback records actions in Storybook. It does not run a test. Component documentation is generated automatically from the shared `autodocs` tag.
+
+## Configuration
+
+- `.storybook/main.js`: story discovery, React/Vite framework, and addons.
+- `.storybook/preview.jsx`: shared CSS, theme toolbar, controls, and documentation defaults.
+- `src/styles/tokens.css`: the same design tokens used by the Todo app.
+
+Docs, Accessibility, MCP, and Chromatic addons follow the reference setup. Automatic accessibility scans are disabled. Docker and standalone test runners are not part of this setup.
